@@ -8,7 +8,7 @@
 
 *AI-powered recommendation engine for SensCritique - Get personalized suggestions based on your tastes*
 
-<img src="https://i.ibb.co/Q7LkRfzX/Capture-d-cran-du-2025-12-11-09-31-39.png" alt="WatWatch screenshot" width="800"/>
+<img src="https://i.ibb.co/Bknb727/watwatch.png" alt="WatWatch screenshot" width="800"/>
 
 </div>
 
