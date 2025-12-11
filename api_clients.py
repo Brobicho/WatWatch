@@ -88,21 +88,11 @@ def fetch_senscritique_collection(username, progress_callback=None):
 
 def get_sc_global_rating(title):
     """Fetch global SensCritique rating for a title via search."""
-    headers = {
+    headers = {        
         'accept': '*/*',
-        'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
-        'authorization': '89b7f82c57b4e7741d51b43a07d5f1e4',
         'content-type': 'application/json',
         'origin': 'https://www.senscritique.com',
-        'priority': 'u=1, i',
-        'referer': f'https://www.senscritique.com/search?query={title}',
-        'sec-ch-ua': '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Linux"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-site',
-        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36',
+        'user-agent': 'Mozilla/5.0'    
     }
 
     json_data = {
