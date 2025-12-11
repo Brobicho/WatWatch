@@ -12,10 +12,10 @@ from file_utils import save_suggestions_to_xls
 
 
 CATEGORIES = [
-    "Film", "Series", "Animated Short Film", "Animated Feature Film",
-    "TV Show", "Drama", "Documentary", "Show", "Album",
-    "Short Film", "Medium Film", "Manga", "Cartoon",
-    "Comics", "Franco-Belgian Comic", "Game"
+    "Film", "Série", "Court-métrage d'animation", "Long-métrage d'animation",
+    "Émission TV", "Drama", "Documentaire", "Spectacle", "Album",
+    "Court-métrage", "Moyen-métrage", "Manga", "Dessin animé",
+    "Comics", "BD Franco-Belge", "Jeu"
 ]
 
 
@@ -72,7 +72,7 @@ class WorkerThread(QThread):
 class App(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Recommandateur SensCritique + OpenAI")
+        self.setWindowTitle("WatWatcher")
         self.setStyleSheet("""
             QWidget {
                 background: #202124;
@@ -109,22 +109,22 @@ class App(QWidget):
 
         self.user_input = QLineEdit()
         self.user_input.setPlaceholderText("Nom d'utilisateur SensCritique…")
-        layout.addWidget(QLabel("Nom d'utilisateur :"))
+        layout.addWidget(QLabel("Nom d'utilisateur"))
         layout.addWidget(self.user_input)
 
-        layout.addWidget(QLabel("Nombre de suggestions :"))
+        layout.addWidget(QLabel("Nombre de suggestions"))
         self.nb_spin = QSpinBox()
         self.nb_spin.setMinimum(1)
         self.nb_spin.setMaximum(50)
         self.nb_spin.setValue(10)
         layout.addWidget(self.nb_spin)
 
-        layout.addWidget(QLabel("Modèle OpenAI :"))
+        layout.addWidget(QLabel("Modèle OpenAI"))
         self.model_combo = QComboBox()
         self.model_combo.addItems(["gpt-4.1-mini", "gpt-4.1", "gpt-5.1"])
         layout.addWidget(self.model_combo)
 
-        layout.addWidget(QLabel("Catégories à considérer :"))
+        layout.addWidget(QLabel("Catégories"))
         self.cat_list = QListWidget()
         self.cat_list.setSelectionMode(QListWidget.MultiSelection)
         for c in CATEGORIES:
