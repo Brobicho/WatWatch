@@ -74,18 +74,18 @@ OPENAI_API_KEY=sk-proj-your-api-key-here
 ### Basic Usage
 
 ```bash
-python open.py
+python run.py
 ```
 
 ### Running in Background
 
 ```bash
 # Using nohup
-nohup python open.py > bot.log 2>&1 &
+nohup python run.py > default.log 2>&1 &
 
 # Using screen
 screen -S WatWatch
-python open.py
+python run.py
 # Press Ctrl+A, then D to detach
 
 ## 🚀 Usage
@@ -93,7 +93,7 @@ python open.py
 ### Launch the Application
 
 ```bash
-python3 final.py
+python3 run.py
 ```
 
 ### Using the GUI
