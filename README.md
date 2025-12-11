@@ -16,19 +16,28 @@
 
 ## 📋 About
 
-Watwatch is an intelligent recommendation tool that analyzes your SensCritique collection and generates personalized suggestions using OpenAI's latest models. It fetches your complete collection asynchronously and provides tailored recommendations across multiple media categories.
+WatWatch est un moteur de recommandation ultra-puissant qui analyse votre collection SensCritique et génère des suggestions personnalisées en utilisant les modèles OpenAI les plus avancés. Le système récupère l'intégralité de votre collection de manière asynchrone et fournit des recommandations précises et pertinentes.
 
 ### ✨ Features
 
-- 🔄 **Async Collection Fetching** - Retrieves your entire SensCritique collection using concurrent pagination
-- 🤖 **AI-Powered Recommendations** - Leverages OpenAI (GPT-4.1, GPT-5.1) for intelligent suggestions
-- 📊 **Interactive Visualization** - Chart displaying recommendations with scores
-- 💾 **Excel Export** - Save recommendations with metadata to Excel files
-- 🎯 **Category Filtering** - Choose specific categories (Films, Series, Games, etc.)
-- 🌐 **Global Ratings** - Automatically fetches SensCritique global ratings for suggestions
-- 🎨 **Modern GUI** - Clean, dark-themed interface built with PySide6
-- 📈 **Progress Tracking** - Real-time progress bar and status updates
-- 🔒 **Secure Configuration** - Environment variable-based API key management
+- 🔄 **Récupération Asynchrone Complète** - Récupère l'intégralité de votre collection SensCritique via pagination concurrente
+- 🤖 **IA de Pointe** - Utilise OpenAI (GPT-4.1, GPT-5.1) pour des suggestions ultra-pertinentes
+- 🎯 **Système Anti-Doublons Avancé** - Filtrage intelligent multi-niveaux garantissant des suggestions 100% inédites :
+  - Normalisation stricte des titres (accents, ponctuation, casse)
+  - Suppression automatique des années et versions entre parenthèses
+  - Détection des suites, prequels et remakes
+  - Détection de similarité par préfixe (80%+ de correspondance)
+  - Vérification d'inclusion de sous-chaînes
+  - **Retry automatique** : jusqu'à 10 tentatives pour atteindre exactement N suggestions valides
+- 📊 **Double Visualisation Interactive** - Deux graphiques Bokeh :
+  - Graphique 1 : Classement par score IA
+  - Graphique 2 : Classement par moyenne (Score IA + Note SC)
+- 💾 **Export Excel** - Sauvegarde des recommandations avec métadonnées complètes
+- 🎯 **Filtrage par Catégorie** - Sélection précise (Films, Séries, Jeux, BD, Livres, etc.)
+- 🌐 **Notes Globales** - Récupération automatique des notes SensCritique pour chaque suggestion
+- 🎨 **Interface Moderne** - GUI sombre et élégante avec PySide6
+- 📈 **Suivi en Temps Réel** - Barre de progression et logs détaillés
+- 🔒 **Configuration Sécurisée** - Gestion des clés API via variables d'environnement
 
 ## ⚙️ Installation
 
@@ -89,19 +98,76 @@ python run.py
 # Press Ctrl+A, then D to detach
 
 ## 🚀 Usage
+1. **Entrez votre nom d'utilisateur SensCritique** dans le champ prévu
+2. **Choisissez le nombre de suggestions** souhaité (1-50)
+3. **Sélectionnez le modèle OpenAI** (gpt-4.1-mini recommandé pour la rapidité)
+4. **Sélectionnez les catégories** à considérer (Films, Séries, Jeux, etc.)
+5. **(Optionnel)** Choisissez l'emplacement du fichier Excel de sortie
+6. **Cliquez sur "Rechercher"** pour lancer le processus
 
-### Launch the Application
+L'application va :
+- Récupérer votre collection SensCritique complète de manière asynchrone
+- Générer des recommandations IA ultra-personnalisées
+- **Éliminer tous les doublons** avec un système de filtrage multi-niveaux
+- **Relancer automatiquement** l'IA si des doublons sont détectés (jusqu'à 10 fois)
+- Récupérer les notes globales pour chaque suggestion
+- Afficher les résultats dans deux graphiques Bokeh interactifs
+- Sauvegarder les résultats en Excel (si configuré)
 
-```bash
-python3 run.py
+## 🔥 Le Système Anti-Doublons
+
+### Pourquoi c'est révolutionnaire ?
+
+Le système garantit **zéro doublon** grâce à :
+
+1. **Normalisation Aggressive**
+   ```
+   "Heat (1995)" → "heat"
+   "Old Boy (Version Coréenne)" → "oldboy"
+   "Inside Man 2" → "insideman2"
+   ```
+
+2. **Détection d'Inclusion**
+   - Si "insideman" ⊂ "insideman2" → Rejeté
+   - Si "matrix" ⊂ "thematrix" → Rejeté
+## 📊 Understanding the Output
+
+### Status Messages
+
+Pendant l'exécution, vous verrez des mises à jour en temps réel :
+
+```
+Récupération de la collection SensCritique...
+✓ 1247 œuvres récupérées
+
+Recherche de suggestions...
+Tentative 1: 4 doublons filtrés, 6 ajoutés (6/10)
+Tentative 2: 2 doublons filtrés, 3 ajoutés (9/10)
+Tentative 3: 0 doublon filtré, 1 ajouté (10/10)
+✓ 10 suggestions trouvées (100% uniques)
+
+Récupération des notes SensCritique...
+✓ Notes récupérées
+
+Sauvegarde du fichier Excel...
+✓ Fichier sauvegardé : /path/to/file.xlsx
+
+✅ Terminé ! Affichage des résultats...
 ```
 
-### Using the GUI
+### Visualisation Interactive
 
-1. **Enter your SensCritique username** in the username field
-2. **Choose the number of suggestions** you want (1-50)
-3. **Select the OpenAI model** (gpt-4.1-mini recommended for speed)
-4. **Select categories** to consider (Films, Series, Games, etc.)
+Deux graphiques Bokeh sont affichés :
+
+**Graphique 1 - Classement par Score IA**
+- **X-axis**: Titres suggérés (triés par score IA décroissant)
+- **Y-axis**: Score de confiance IA (0-100)
+- **Tooltips**: Titre, Score IA, Note SC Globale
+
+**Graphique 2 - Classement par Moyenne**
+- **X-axis**: Titres suggérés (triés par moyenne décroissante)
+- **Y-axis**: Moyenne = (Score IA + Note SC × 10) / 2
+- **Tooltips**: Titre, Score IA, Note SC Globale, Moyenne
 5. **(Optional)** Choose an output Excel file location
 6. **Click "Rechercher"** to start the recommendation process
 
