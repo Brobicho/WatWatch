@@ -1,0 +1,7 @@
+requests
+openai
+pyside6
+bokeh
+xlsxwriter
+aiohttp
+python-dotenv
