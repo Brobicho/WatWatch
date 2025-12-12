@@ -8,7 +8,15 @@ def show_bokeh(suggestions, filename="suggestions.html"):
     # Sort suggestions by AI score (descending) for first chart
     sorted_by_ai = sorted(suggestions, key=lambda x: float(x["score"]), reverse=True)
     
-    titles_ai = [s["title"] for s in sorted_by_ai]
+    # Add year to title display for first chart
+    titles_ai = []
+    for s in sorted_by_ai:
+        title = s["title"]
+        year = s.get("year")
+        if year:
+            title = f"{title} ({year})"
+        titles_ai.append(title)
+    
     scores_ai = [float(s["score"]) for s in sorted_by_ai]
     sc_vals_ai = [s.get("rating_sc_global") for s in sorted_by_ai]
     sc_strs_ai = [f"{v:.1f}" if isinstance(v, (int, float)) and v is not None else "N/A" for v in sc_vals_ai]
@@ -27,7 +35,15 @@ def show_bokeh(suggestions, filename="suggestions.html"):
     suggestions_with_avg.sort(key=lambda x: x[1], reverse=True)
     sorted_by_avg = [s for s, _ in suggestions_with_avg]
     
-    titles_avg = [s["title"] for s in sorted_by_avg]
+    # Add year to title display for second chart
+    titles_avg = []
+    for s in sorted_by_avg:
+        title = s["title"]
+        year = s.get("year")
+        if year:
+            title = f"{title} ({year})"
+        titles_avg.append(title)
+    
     scores_avg = [float(s["score"]) for s in sorted_by_avg]
     sc_vals_avg = [s.get("rating_sc_global") for s in sorted_by_avg]
     sc_strs_avg = [f"{v:.1f}" if isinstance(v, (int, float)) and v is not None else "N/A" for v in sc_vals_avg]

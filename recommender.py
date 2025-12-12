@@ -65,6 +65,7 @@ FORMAT DE RÉPONSE (JSON STRICT, PAS DE TEXTE AUTOUR) :
     {{
       "title": "Titre de l'œuvre",
       "category": "Une valeur parmi : {allowed_txt}",
+      "year": 2024,
       "reason": "Pourquoi cette recommandation est pertinente pour moi",
       "score": 0-100
     }}
@@ -134,6 +135,7 @@ FORMAT DE RÉPONSE (JSON STRICT, PAS DE TEXTE AUTOUR) :
     {{
       "title": "Titre de l'œuvre",
       "category": "Une valeur parmi : {allowed_txt}",
+      "year": 2024,
       "reason": "Pourquoi cette recommandation est pertinente pour moi",
       "score": 0-100
     }}
@@ -211,6 +213,7 @@ def get_recommendations(collection, n_suggestions, categories, model):
             category = s.get("category")
             reason = s.get("reason", "")
             score = s.get("score", 0)
+            year = s.get("year")
 
             if not title or not category:
                 continue
@@ -270,12 +273,19 @@ def get_recommendations(collection, n_suggestions, categories, model):
                 score = float(score)
             except (ValueError, TypeError):
                 score = 0.0
+            
+            # Validate and convert year
+            try:
+                year = int(year) if year else None
+            except (ValueError, TypeError):
+                year = None
 
             all_suggestions.append({
                 "title": title,
                 "category": category,
                 "reason": reason,
                 "score": score,
+                "year": year,
             })
             already_suggested.add(norm_title)
             added_this_round += 1
