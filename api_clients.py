@@ -58,7 +58,7 @@ async def fetch_senscritique_page(session, username, offset, limit, progress_cal
 
 async def fetch_senscritique_collection_async(username, progress_callback=None):
     """Fetch complete SensCritique collection using concurrent pagination."""
-    limit = 100
+    limit = 1000
     all_items = []
     
     async with aiohttp.ClientSession() as session:

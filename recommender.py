@@ -54,6 +54,10 @@ CONTRAINTES STRICTES :
 - Ne recommande JAMAIS une œuvre dont le titre figure exactement dans la liste JSON ci-dessus.
 - Si tu n'es pas sûr d'une catégorie, choisis la plus proche dans cette liste et reste cohérent.
 - Si tu n'arrives pas à trouver assez d'œuvres qui respectent ces contraintes, propose-en moins, mais ne casse pas le JSON.
+- IMPORTANT - CONTRAINTES D'ÉPOQUE :
+  * Maximum 10% d'œuvres sorties avant 1980
+  * Maximum 20% d'œuvres sorties avant 2000
+  * Privilégie les œuvres récentes (2000+) pour au moins 80% des suggestions
 
 FORMAT DE RÉPONSE (JSON STRICT, PAS DE TEXTE AUTOUR) :
 {{
@@ -119,6 +123,10 @@ CONTRAINTES STRICTES :
 - Ne recommande PAS les doublons que tu as déjà suggérés
 - Ne recommande PAS les suggestions valides déjà faites
 - Propose des œuvres COMPLÈTEMENT DIFFÉRENTES
+- IMPORTANT - CONTRAINTES D'ÉPOQUE :
+  * Maximum 10% d'œuvres sorties avant 1980
+  * Maximum 20% d'œuvres sorties avant 2000
+  * Privilégie les œuvres récentes (2000+) pour au moins 80% des suggestions
 
 FORMAT DE RÉPONSE (JSON STRICT, PAS DE TEXTE AUTOUR) :
 {{
